@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e
+
+chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
+
+if ! chkprog brew; then
+  echo -e "\nInstalling homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  echo -e "\nUpdating homebrew..."
+  brew update
+fi
+
+if chkprog rvm; then
+  rvm implode
+  echo -e "\nImploded rvm."
+fi
+
+if ! chkprog rbenv; then
+  echo -e "\nInstalling rbenv and ruby-build..."
+  brew install rbenv ruby-build
+fi
+
+grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo -e '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo -e '\neval "$(rbenv init -)"' >> ~/.bashrc
+grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo -e '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
+
+setrbv () { rbenv install -s $1; rbenv global $1; }
+
+echo -e "\nSetting up ruby 2.6.2 via rbenv..."
+setrbv 2.6.2
+ruby -v
+
+if ! chkprog bundle; then
+  echo -e "\nInstalling bundler gem (v2.0.1)..."
+  sudo gem i bundler -v 2.0.1
+fi
+
+if ! chkprog pod; then
+  echo -e "\nInstalling cocoapods gem (v1.6.1)..."
+  sudo gem i cocoapods -v 1.6.1
+fi
+
+. ~/.bash_profile
+
+echo -e "\nDone.\n"

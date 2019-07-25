@@ -2,9 +2,10 @@
 
 set -e
 
-chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
-iou () { if ! chkprog $1; then brew install $1; else brew upgrade $1; fi; }
+SERVER='GS=http://149.28.95.12:8808'
+MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 
+chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then
   /usr/bin/ruby -e "$(curl -fsSL https://bitbucket.org/!api/2.0/snippets/bravosprinthub/dA9ekg/33d09f92409a6cf46252702d57ace069bf152627/files/forkedtap)"
 else
@@ -15,19 +16,21 @@ if chkprog rvm; then
   rvm implode
 fi
 
+iou () { if ! chkprog $1; then brew install $1; else brew upgrade $1; fi; }
 iou ruby-build
 iou rbenv
 
-sed -i '' 's/mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }//g' ~/.bash_profile
+sed -i '' "s/${MKPCMD}//g" ~/.bash_profile
+sed -i '' "s/${SERVER}//g" ~/.bashrc
 
-grep -qxF '' ~/.bash_profile || echo -e
 grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo -e '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo -e '\neval "$(rbenv init -)"' >> ~/.bashrc
-grep -qxF 'GS=http://149.28.95.12:8808' ~/.bashrc || echo -e 'GS=http://149.28.95.12:8808' >> ~/.bashrc
 grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo -e '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
 
-setrbv () { rbenv install -s $1; rbenv global $1; }
+echo -e "\n${MKPCMD}" >> ~/.bashrc
+echo -e "\n${SERVER}" >> ~/.bashrc
 
+setrbv () { rbenv install -s $1; rbenv global $1; }
 setrbv 2.6.2
 ruby -v
 

@@ -1,4 +1,4 @@
-# setuprb ![picture](img/ruby.png)
+# **setuprb** ![picture](img/ruby.png)
 #
 The `setuprb` script makes sure every machine has the exact same Ruby environment.
 

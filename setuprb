@@ -12,32 +12,21 @@ else
   brew update
 fi
 
-if chkprog rvm; then
-  rvm implode
-fi
+if chkprog rvm; then rvm implode; fi
 
-iou () { if ! chkprog $1; then brew install $1; else brew upgrade $1; fi; }
-iou ruby-build
-iou rbenv
+biou () { for arg in "$@"; do if ! chkprog $arg; then brew install $arg; else brew upgrade $arg; fi; done }
+biou rbenv ruby-build
 
 sed -i '' "s/${MKPCMD}//g" ~/.bash_profile
 sed -i '' "s/${SERVER}//g" ~/.bashrc
+edrc () { for cmd in "$@"; do echo -e "\n${$cmd}" >> ~/.bashrc; done }; edrc MKPCMD SERVER
 
 grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo -e '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo -e '\neval "$(rbenv init -)"' >> ~/.bashrc
 grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo -e '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
 
-echo -e "\n${MKPCMD}" >> ~/.bashrc
-echo -e "\n${SERVER}" >> ~/.bashrc
-
-setrbv () { rbenv install -s $1; rbenv global $1; }
-setrbv 2.6.2
+setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2
 ruby -v
 
-if ! chkprog bundle; then
-  sudo gem i bundler -v 2.0.1
-fi
-
-if ! chkprog pod; then
-  sudo gem i cocoapods -v 1.6.1
-fi
+if ! chkprog bundle; then sudo gem i bundler -v 2.0.2; fi
+if ! chkprog pod; then sudo gem i cocoapods -v 1.7.5; fi

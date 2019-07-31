@@ -2,8 +2,9 @@
 
 set -e
 
+sudo spctl --master-disable
+
 SERVER='GS=http://149.28.95.12:8808'
-MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 
 chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then
@@ -14,9 +15,9 @@ fi
 
 if chkprog rvm; then rvm implode; fi
 
-biou () { for arg in "$@"; do if ! chkprog $arg; then brew install $arg; else brew upgrade $arg; fi; done }
-biou rbenv ruby-build
+biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i; fi; done }; biu tmux rbenv ruby-build
 
+MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 sed -i '' "s/${MKPCMD}//g" ~/.bash_profile
 sed -i '' "s/${SERVER}//g" ~/.bashrc
 edrc () { for cmd in "$@"; do echo -e "\n${$cmd}" >> ~/.bashrc; done }; edrc MKPCMD SERVER
@@ -25,8 +26,7 @@ grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo -e '\nexport 
 grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo -e '\neval "$(rbenv init -)"' >> ~/.bashrc
 grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo -e '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
 
-setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2
-ruby -v
+setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2; ruby -v
 
 if ! chkprog bundle; then sudo gem i bundler -v 2.0.2; fi
 if ! chkprog pod; then sudo gem i cocoapods -v 1.7.5; fi

@@ -15,7 +15,7 @@ fi
 
 if chkprog rvm; then rvm implode; fi
 
-biu () { for i in "$@"; do if ! chkprog $i; then brew install $i || :; else brew upgrade $i || :; fi; done }; biu tmux rbenv ruby-build
+biu () { for i in "$@"; do if ! chkprog $i; then brew install $i || true; else brew upgrade $i || true; fi; done }; biu tmux rbenv ruby-build || true
 
 MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 sed -i '' "s/${MKPCMD}//g" ~/.bash_profile

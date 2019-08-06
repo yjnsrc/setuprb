@@ -27,4 +27,4 @@ setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2; ruby -v
 if ! chkprog bundle; then sudo gem i bundler -v 2.0.2; fi
 if ! chkprog pod; then sudo gem i cocoapods -v 1.7.5; fi
 
-  echo 'echo3';
+echo 'echo3';

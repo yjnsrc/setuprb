@@ -8,7 +8,7 @@ chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then
   /usr/bin/ruby -e "$(curl -fsSL https://bitbucket.org/!api/2.0/snippets/bravosprinthub/dA9ekg/33d09f92409a6cf46252702d57ace069bf152627/files/forkedtap)"; else brew update;
 fi; if chkprog rvm; then rvm implode; fi
-biu () { for i in "$@"; echo $i; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null; fi; done }; biu tmux rbenv ruby-build ninja
+biu () { for i in "$@"; do echo $i; if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null; fi; done }; biu tmux rbenv ruby-build ninja
 
 MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 sed -ie '' "s/${MKPCMD}//g" ~/.bash_profile 2>/dev/null

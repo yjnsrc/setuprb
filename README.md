@@ -16,7 +16,7 @@ $ echo $SHELL    # output should be -> bin/bash
 
 From your terminal, execute this command:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yjnsrc/setuprb/master/setuprb | bash /dev/stdin arg0 arg1
+curl -fsSL https://raw.githubusercontent.com/yjnsrc/setuprb/master/setuprb | sh /dev/stdin arg0 arg1
 ```
 
 

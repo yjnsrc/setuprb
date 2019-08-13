@@ -18,9 +18,9 @@ edrc () { for cmd in "$@"; do echo $($cmd); echo -e "\n"$($cmd) >> ~/.bashrc; do
 
 echo 'echo1';
 
-grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo -e '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo -e '\neval "$(rbenv init -)"' >> ~/.bashrc
-grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo -e '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
+grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo '\neval "$(rbenv init -)"' >> ~/.bashrc
+grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
 
 echo 'echo2';
 

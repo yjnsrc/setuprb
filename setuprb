@@ -11,11 +11,10 @@ if ! chkprog brew; then
 fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do echo $i; if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null || true; fi; done }; biu tmux rbenv ninja
 
-MKPCMD="mkproj"
-perl -pe "s^$SERVER^^g" ~/.bashrc 2> /dev/null
-perl -pe "s#$MKPCMD.*##g" ~/.bashrc 2> /dev/null
-# sed -ie '' "s/$MKPCMD//g" ~/.bashrc 2> /dev/null || true
-# sed -ie '' "s/$SERVER//g" ~/.bashrc 2> /dev/null || true
+MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
+MKPCMD_SEAR='mkproj ()'
+(perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
+(perl -pe "s#$MKPCMD_SEAR.*##g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$MKPCMD" "$SERVER"
 
 echo 'echo1';

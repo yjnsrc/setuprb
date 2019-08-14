@@ -1,10 +1,10 @@
 # **setuprb** ![picture](img/ruby.png)
-The `setuprb` script makes sure every Yeojinet MacOS machine has the exact same Ruby environment, tools and configurations.
+`setuprb` makes sure every `Yeojinet` MacOS machine has the exact same Ruby environment, tools and configurations.
 
 
 ### Requirements
 
-SSH access to the Yeojinet BravoSprintHub Bitbucket repository.
+SSH access to the `Yeojinet` BravoSprintHub Bitbucket repository.
 
 
 ### Usage
@@ -17,4 +17,4 @@ curl -fsSL $(echo aHR0cDovL2JpdC5seS8yTWdDZjd4 | base64 -D) | sh /dev/stdin arg0
 
 ### Notes
 
-Using this script is a pre-requisite to properly running the `tuka` gem.
+This is a pre-requisite to properly running the `tuka` gem.

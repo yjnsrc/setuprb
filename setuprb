@@ -2,9 +2,9 @@
 
 set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 multi () { for f in "$@"; do touch $HOME/.${f}; done }; multi bash_profile bashrc
-chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
-if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL http://bit.ly/2KOr6Yr)"; else brew update; fi; if chkprog rvm; then rvm implode; fi
-biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null || true; fi; done }; biu tmux rbenv ninja
+chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
+if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL http://bit.ly/2KOr6Yr)"; else brew update 1> /dev/null; fi; if chkprog rvm; then rvm implode; fi
+biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja
 
 MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'; MKPCMDS='mkproj ()'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
@@ -15,7 +15,7 @@ grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo '\nexport PAT
 grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo '\neval "$(rbenv init -)"' >> ~/.bashrc
 grep -qxF '[ -r ~/.bashrc ] && . ~/.bashrc' ~/.bash_profile || echo '\n[ -r ~/.bashrc ] && . ~/.bashrc' >> ~/.bash_profile
 
-setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2; ruby -v
+setrbv () { rbenv install -s $1; rbenv global $1; }; setrbv 2.6.2;
 if ! chkprog bundle; then sudo gem i bundler -v 2.0.2; fi
 if ! chkprog pod; then sudo gem i cocoapods -v 1.7.5; fi
 echo 'Done'; bash -l

@@ -6,7 +6,7 @@ chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL http://bit.ly/2KOr6Yr)"; else brew update 1> /dev/null; fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja gnu-sed
 
-MKP='mkproj ()'; MKPCMD=$MKP'mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
+MKP='mkproj ()'; MKPCMD=$MKP'{ git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 (perl -pe "s#$MKPCMDS.*##g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$MKPCMD" "$SERVER"

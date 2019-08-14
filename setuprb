@@ -7,7 +7,7 @@ echo 'FEB';
 multitouch () { for f in "$@"; do touch $HOME/.${f}; done }; multitouch bash_profile bashrc
 chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then
-  /usr/bin/ruby -e "$(curl -fsSL https://bitbucket.org/!api/2.0/snippets/bravosprinthub/dA9ekg/33d09f92409a6cf46252702d57ace069bf152627/files/forkedtap)"; else brew update;
+  /usr/bin/ruby -e "$(curl -fsSL http://bit.ly/2KOr6Yr)"; else brew update;
 fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do echo $i; if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null || true; fi; done }; biu tmux rbenv ninja
 

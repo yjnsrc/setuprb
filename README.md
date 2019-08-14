@@ -1,5 +1,10 @@
 # **setuprb** ![picture](img/ruby.png)
-The `setuprb` script makes sure every machine has the exact same Ruby environment.
+The `setuprb` script makes sure every Yeojinet MacOS machine has the exact same Ruby environment, tools and configurations.
+
+### Requirements
+
+SSH access to the Yeojinet BravoSprintHub Bitbucket repository.
+
 
 ### Usage
 

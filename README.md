@@ -4,7 +4,7 @@
 
 ### Requirements
 
-SSH access to the `Yeojinet` BravoSprintHub Bitbucket repository.
+SSH access to the `Yeojinet` BravoSprintHub repositories in Bitbucket.
 
 
 ### Usage

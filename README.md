@@ -1,4 +1,4 @@
-# **setuprb** ![picture](img/ruby.png)
+# **setuprb** ![picture](IMGME/ruby.png)
 `setuprb` makes sure every `Yeojinet` MacOS machine has the exact same Ruby environment, tools and configurations.
 
 

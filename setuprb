@@ -11,6 +11,7 @@ biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgr
 MKP='mkproj ()'; SNIPT=$MKP' { git clone '$(dbsf Z2l0QGJpdGJ1Y2tldC5vcmc6YnJhdm9zcHJpbnRodWIvbWtwcm9qLmdpdA==)' $1 && cd $1'" && ls -a | grep -E '(\..+|.+ME.*)' | "'gxargs -d"\\n" rm -rf; }'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
 (perl -pe "s#$MKP.*##g" ~/.bashrc > ~/.bashrc) 2> /dev/null
+(perl -pe "s^$MKP.*##g" ~/.bash_profile > ~/.bash_profile) 2> /dev/null
 edrc () { for cmd in "$@"; do echo "\n$cmd" >> ~/.bashrc; done }; edrc "$SNIPT" "$SERVER"
 
 grep -qxF 'export PATH="$HOME/.rbenv/bin:$PATH"' ~/.bashrc || echo '\nexport PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc

